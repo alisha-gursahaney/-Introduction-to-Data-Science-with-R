@@ -1,0 +1,88 @@
+---
+title: "Homework 3"
+author: "Alisha Meena Gursahaney"
+date: "2023-01-06"
+output: html_document
+---
+
+Import Libraries and Initial Conditions
+
+```{r}
+library(dplyr)
+
+TB<-read.csv("/Users/alishagursahaney/Desktop/R/who_dataset.csv")
+
+library(rvest)
+```
+
+
+#Question 1
+(a)
+```{r}
+TB1 <- TB%>%
+  rename(age_group=age,tb_type=var)
+head(TB1)
+```
+
+(b)
+```{r}
+TB1%>%
+  select(tb_type)%>%
+  table()
+```
+
+(c)
+```{r}
+TB1%>%
+  select(tb_type,sex)%>%
+  table()
+```
+
+
+(d)
+```{r}
+US_TB<-TB1%>%
+  filter(country=="United States of America",year==2013)%>%
+  arrange(desc(cases))
+head(US_TB)
+```
+(e)
+```{r}
+Ghana_TB<-TB1%>%
+  filter(country=="Ghana",year==2013)%>%
+  group_by(sex)%>%
+  summarise(cases=sum(cases))
+```
+
+
+#Question 2
+
+```{r}
+website<-"https://www.imdb.com/search/title/?groups=top_250&sort=user_rating"
+IMBD<-read_html(website)
+Title<-IMBD%>%
+  html_nodes(".lister-item-header a")%>%
+  html_text()
+Rank<-IMBD%>%
+  html_nodes(".text-primary")%>%
+  html_text()
+Genre<-IMBD%>%
+  html_nodes(".genre")%>%
+  html_text()
+Rating<-IMBD%>%
+  html_nodes(".ratings-imdb-rating strong")%>%
+  html_text()
+Runtime<-IMBD%>%
+  html_nodes(".runtime")%>%
+  html_text()
+Certificate<-IMBD%>%
+  html_nodes(".certificate")%>%
+  html_text()
+Votes<-IMBD%>%
+  html_nodes(".sort-num_votes-visible span:nth-child(2)")%>%
+  html_text()
+
+top50movies<-data.frame(Title,Rank,Genre,Rating,Runtime,Certificate,Votes)
+head(top50movies)
+```
+

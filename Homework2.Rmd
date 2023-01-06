@@ -1,0 +1,137 @@
+---
+title: "Homework2"
+author: "Alisha Meena Gursahaney"
+date: "2023-01-06"
+output: html_document
+---
+#Question 1
+Citations:
+
+R Sequence function: https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/seq
+
+R Replicate function: https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/rep
+
+-used these citations because I felt that some of my methods differed from those taught in class and wanted to put them just in case
+
+(a)
+```{r}
+rep("Q1", 4)
+```
+
+(b)
+```{r}
+seq(50.0, 100.0, by = 2.5)
+
+```
+
+(c)
+```{r}
+rep(2010:2017, each=4)
+```
+
+(d)
+```{r}
+vect<-rep(2010:2017, each=4)
+vect[25:31]
+```
+
+
+(e)
+```{r}
+vec1<-seq(1295,1299)
+vec2<-seq(1300,1290, by=-1)
+c(vec1,vec2)
+```
+
+(f)
+```{r}
+seq(4160,3530, by=-105)
+```
+
+#Question 2
+Set up dataframe and library for all question parts
+```{r}
+PVA_data<-read.csv("/Users/alishagursahaney/Desktop/R/PVA.csv")
+library(dplyr)
+```
+(a)
+```{r}
+typeof(PVA_data$Age)
+mean(PVA_data$Age)
+```
+
+(b)
+```{r}
+# 1st method
+names(PVA_data)[5]<- "income_level"
+names(PVA_data)[8]<- "current_gift"
+head(PVA_data)
+```
+way to do this in one line of code:
+
+names(PVA_data)[c(5,8)]<- c("income_level", "current_gift")
+
+
+using dplyr:
+
+PVA_data%>%
+  
+  rename(Income=income_level, Current.gift=current_gift)
+
+(c)
+```{r}
+New_data<-PVA_data%>%
+  filter(Age <= 60 & income_level >5)
+head(New_data)
+```
+(d)
+```{r}
+Donors<-PVA_data%>%
+  filter(current_gift > 50 & Time.Between.Gifts > 1)
+mean(Donors$current_gift)
+```
+
+(e)
+```{r}
+PVA_data%>%
+  summarise(max(Smallest.Gift), max(Largest.Gift), max(current_gift))
+```
+
+(f)
+```{r}
+# Income = 1
+Income1<-PVA_data%>%
+  filter(income_level == 1)
+median(Income1$current_gift)
+
+# Income = 2
+Income2<-PVA_data%>%
+  filter(income_level == 2)
+median(Income2$current_gift)
+
+# Income = 3
+Income3<-PVA_data%>%
+  filter(income_level == 3)
+median(Income3$current_gift)
+
+# Income = 4
+Income4<-PVA_data%>%
+  filter(income_level == 4)
+median(Income4$current_gift)
+
+# Income = 5
+Income5<-PVA_data%>%
+  filter(income_level == 5)
+median(Income5$current_gift)
+
+# Income = 6
+Income6<-PVA_data%>%
+  filter(income_level == 6)
+median(Income6$current_gift)
+
+# Income = 7
+Income7<-PVA_data%>%
+  filter(income_level == 7)
+median(Income7$current_gift)
+```
+

@@ -1,0 +1,47 @@
+---
+title: "Homework 1"
+author: "Alisha Meena Gursahaney"
+date: "2023-01-04"
+output: html_document
+---
+
+# Question 1
+
+(a) 
+```{r}
+((9)*(3+5)**3)/sqrt(10)
+```
+
+(b)
+```{r}
+a=5
+b=-2
+c=0.5
+(a*c*(b**2))/abs(b)
+```
+
+(c)
+```{r}
+sum((0.35*94.3),(0.35*86.1),(0.30*88.5))
+```
+89.69% = Grade B+
+
+# Question 2
+```{r}
+library(nycflights13)
+airports
+```
+
+# Question 3
+```{r}
+mtcars
+write.csv(mtcars, "/Users/alishagursahaney/Desktop/R/mtcars.csv")
+```
+
+# Question 4
+```{r}
+nba <- read.csv("/Users/alishagursahaney/Desktop/R/nba.csv")
+table(nba$TEAM)
+mean(nba$AST, na.rm=TRUE)
+```
+
